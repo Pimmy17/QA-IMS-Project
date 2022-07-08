@@ -1,7 +1,8 @@
 Coverage: 34%
-# Project Title
+# QA IMS Project
 
-One Paragraph of project description goes here
+This is a back-end based project that uses the CLI to create, view, update and delete a fictional shop using customers, items and an order basket.
+It is created using Java, MySQL, Maven, JUnit and Mockito.
 
 ## Getting Started
 
@@ -84,6 +85,5 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Ed Reynolds & Jordan Harrison @ QA Ltd
+* PG Tips for providing the tea that keeps me going!
