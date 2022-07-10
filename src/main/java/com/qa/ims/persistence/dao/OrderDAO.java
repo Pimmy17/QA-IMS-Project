@@ -1,7 +1,6 @@
 package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,9 +23,9 @@ public class OrderDAO implements Dao<Order> {
 		Long order_id = resultSet.getLong("order_id");
 		Long fk_customer_id = resultSet.getLong("fk_customer_id");
 		Long fk_item_id = resultSet.getLong("fk_item_id");
-		Date purchase_date = resultSet.getDate("purchase_date");
+//		Date purchase_date = resultSet.getDate("purchase_date");
 		Integer quantity = resultSet.getInt("quantity");
-		return new Order(order_id, fk_customer_id, fk_item_id, purchase_date, quantity);
+		return new Order(order_id, fk_customer_id, fk_item_id, quantity);
 	}
 
 	/**
@@ -74,10 +73,10 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement(
 						"INSERT INTO orders(fk_customer_id, fk_item_id, purchase_date, quantity) VALUES (?, ?, ?, ?)");) {
-			statement.setLong(1, orders.getCustomer_ID());
-			statement.setLong(2, orders.getItem_ID());
-			statement.setDate(3, orders.getPurchase_Date());
-			statement.setInt(4, orders.getQuantity());
+			statement.setLong(1, order.getFk_customer_id());
+			statement.setLong(2, order.getFk_item_id());
+			statement.setDate(3, order.getPurchase_date());
+			statement.setInt(4, order.getQuantity());
 			statement.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {
@@ -88,10 +87,10 @@ public class OrderDAO implements Dao<Order> {
 	}
 
 	@Override
-	public Order read(Long id) {
+	public Order read(Long order_id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE id = ?");) {
-			statement.setLong(1, id);
+			statement.setLong(1, order_id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
 				return modelFromResultSet(resultSet);
@@ -115,10 +114,10 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("UPDATE orders SET quantity = ? WHERE order_id = ?");) {
-			statement.setInt(1, orders.getQuantity());
-			statement.setLong(2, orders.getOrder_ID());
+			statement.setInt(1, order.getQuantity());
+			statement.setLong(2, order.getOrder_id());
 			statement.executeUpdate();
-			return read(orders.getOrder_ID());
+			return read(order.getOrder_id());
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());

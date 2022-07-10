@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.utils.Utils;
 
 public class OrderController implements CrudController<Order> {
@@ -40,13 +41,13 @@ public class OrderController implements CrudController<Order> {
 	public Order create() {
 		LOGGER.info("Please select a customer");
 		// Create a drop-down menu to select an existing customer
-		Long customerID = utils.getLong();
+		Long fk_customer_id = utils.getLong();
 		LOGGER.info("Please add an item to the order");
 		// Create a drop-down menu to select an existing item
-		Long itemID = utils.getLong();
+		Long fk_item_id = utils.getLong();
 		LOGGER.info("Please enter a quantity");
 		Integer quantity = utils.getInt();
-		Order order = orderDAO.create(new Order(customerID, itemID, quantity));
+		Order order = orderDAO.create(new Order(fk_customer_id, fk_item_id, quantity));
 		LOGGER.info("Order created");
 		return order;
 	}
@@ -57,13 +58,16 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public Order update() {
 		LOGGER.info("Please enter the id of the order you would like to update");
-		Long id = utils.getLong();
+		Long order_id = utils.getLong();
+		LOGGER.info("Please enter a customer name");
+		// Create a drop-down menu of current customers
+		Long fk_customer_id = utils.getLong();
 		LOGGER.info("Please enter an item name");
 		// Create a drop-down menu of current items in the order
-		Long itemID = utils.getLong();
+		Long fk_item_id = utils.getLong();
 		LOGGER.info("Please enter a quantity");
 		Integer quantity = utils.getInt();
-		Order order = orderDAO.update(new Order(id, itemID, quantity));
+		Order order = orderDAO.update(new Order(order_id, fk_customer_id, fk_item_id, quantity));
 		LOGGER.info("Order Updated");
 		return order;
 	}
@@ -76,8 +80,8 @@ public class OrderController implements CrudController<Order> {
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the id of the order you would like to delete");
-		Long id = utils.getLong();
-		return orderDAO.delete(id);
+		Long order_id = utils.getLong();
+		return orderDAO.delete(order_id);
 	}
 
 }
