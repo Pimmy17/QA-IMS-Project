@@ -1,26 +1,23 @@
 package com.qa.ims.persistence.domain;
 
-import java.sql.Date;
-
 public class Order {
 
 	private Long order_id;
 	private Long fk_customer_id;
-	private Long fk_item_id;
-	private Date purchase_date;
+	private Long item_id;
 	private Integer quantity;
 
-	public Order(Long fk_customer_id, Long fk_item_id, Integer quantity) {
+	public Order(Long fk_customer_id, Long item_id, Integer quantity) {
 		super();
 		this.fk_customer_id = fk_customer_id;
-		this.fk_item_id = fk_item_id;
+		this.item_id = item_id;
 		this.quantity = quantity;
 	}
 
-	public Order(Long order_id, Long fk_customer_id, Long fk_item_id, Integer quantity) {
+	public Order(Long order_id, Long fk_customer_id, Long item_id, Integer quantity) {
 		this.order_id = order_id;
 		this.fk_customer_id = fk_customer_id;
-		this.fk_item_id = fk_item_id;
+		this.item_id = item_id;
 		this.quantity = quantity;
 	}
 
@@ -40,20 +37,12 @@ public class Order {
 		this.fk_customer_id = fk_customer_id;
 	}
 
-	public Long getFk_item_id() {
-		return fk_item_id;
+	public Long getItem_id() {
+		return item_id;
 	}
 
-	public void setFk_item_id(Long fk_item_id) {
-		this.fk_item_id = fk_item_id;
-	}
-
-	public Date getPurchase_date() {
-		return purchase_date;
-	}
-
-	public void setPurchase_date(Date purchase_date) {
-		this.purchase_date = purchase_date;
+	public void setItem_id(Long item_id) {
+		this.item_id = item_id;
 	}
 
 	public Integer getQuantity() {
@@ -62,6 +51,23 @@ public class Order {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	@Override
+	public String toString() {
+		return "Order Number: " + order_id + ", Customer ID: " + fk_customer_id + ", Item ID: " + item_id
+				+ ", Quantity: " + quantity;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
+		result = prime * result + ((fk_customer_id == null) ? 0 : fk_customer_id.hashCode());
+		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		return result;
 	}
 
 	@Override
@@ -78,10 +84,10 @@ public class Order {
 				return false;
 		} else if (!getFk_customer_id().equals(other.getFk_customer_id()))
 			return false;
-		if (getFk_item_id() == null) {
-			if (other.getFk_item_id() != null)
+		if (getItem_id() == null) {
+			if (other.getItem_id() != null)
 				return false;
-		} else if (!getFk_item_id().equals(other.getFk_item_id()))
+		} else if (!getItem_id().equals(other.getItem_id()))
 			return false;
 		if (order_id == null) {
 			if (other.order_id != null)
@@ -92,11 +98,6 @@ public class Order {
 			if (other.quantity != null)
 				return false;
 		} else if (!quantity.equals(other.quantity))
-			return false;
-		if (purchase_date == null) {
-			if (other.purchase_date != null)
-				return false;
-		} else if (!purchase_date.equals(other.purchase_date))
 			return false;
 		return true;
 	}
