@@ -24,7 +24,8 @@ public class OrderDAO implements Dao<Order> {
 		Long fk_customer_id = resultSet.getLong("fk_customer_id");
 		Long item_id = resultSet.getLong("items_id");
 		Integer quantity = resultSet.getInt("quantity");
-		return new Order(order_id, fk_customer_id, item_id, quantity);
+		Double total = resultSet.getDouble("total");
+		return new Order(order_id, fk_customer_id, item_id, quantity, total);
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
-						"SELECT * FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id");) {
+						"SELECT *, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -54,7 +55,7 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
-						"SELECT * FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id ORDER BY order_id DESC LIMIT 1");) {
+						"SELECT *, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id ORDER BY order_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -113,8 +114,8 @@ public class OrderDAO implements Dao<Order> {
 	@Override
 	public Order update(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement("UPDATE orders SET item_id = ?, quantity = ? WHERE order_id = ?");) {
+				PreparedStatement statement = connection.prepareStatement(
+						"UPDATE orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id SET items.id = ?, orders_items.quantity = ? WHERE orders.order_id = ?");) {
 			statement.setLong(1, order.getItem_id());
 			statement.setInt(2, order.getQuantity());
 			statement.setLong(3, order.getOrder_id());
