@@ -26,6 +26,13 @@ public class Order {
 		this.total = total;
 	}
 
+	public Order(Long fk_customer_id2, Long order_id2, Long item_id2, Integer quantity2) {
+		this.order_id = order_id2;
+		this.fk_customer_id = fk_customer_id2;
+		this.item_id = item_id2;
+		this.quantity = quantity2;
+	}
+
 	public Long getOrder_id() {
 		return order_id;
 	}
