@@ -32,7 +32,7 @@ public class ItemControllerTest {
 	@Test
 	public void testCreate() {
 		final String ITEM_NAME = "Rubix Cube";
-		final Double PRICE = 1.50;
+		final double PRICE = 1.50;
 		final Item created = new Item(ITEM_NAME, PRICE);
 
 		Mockito.when(utils.getString()).thenReturn(ITEM_NAME);
