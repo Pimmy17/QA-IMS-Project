@@ -10,6 +10,7 @@ public class Order {
 	private Integer quantity;
 	private Double total;
 	private String customer_name;
+	private String item_name;
 	DecimalFormat df = new DecimalFormat("#0.00");
 
 	public Order(Long fk_customer_id, Long item_id, Integer quantity) {
@@ -19,14 +20,15 @@ public class Order {
 		this.setQuantity(quantity);
 	}
 
-	public Order(Long order_id, Long fk_customer_id, Long item_id, Integer quantity, Double total,
-			String customer_name) {
+	public Order(Long order_id, Long fk_customer_id, Long item_id, Integer quantity, Double total, String customer_name,
+			String item_name) {
 		this.setOrder_id(order_id);
 		this.setFk_customer_id(fk_customer_id);
 		this.setItem_id(item_id);
 		this.setQuantity(quantity);
 		this.setTotal(total);
 		this.setCustomer_name(customer_name);
+		this.setItem_name(item_name);
 	}
 
 	public Order(Long fk_customer_id2, Long order_id2, Long item_id2, Integer quantity2) {
@@ -34,6 +36,15 @@ public class Order {
 		this.setFk_customer_id(fk_customer_id2);
 		this.setItem_id(item_id2);
 		this.setQuantity(quantity2);
+	}
+
+	public Order(Long fk_customer_id2, Long order_id2, Long item_id2) {
+		this.setOrder_id(order_id2);
+		this.setFk_customer_id(fk_customer_id2);
+		this.setItem_id(item_id2);
+	}
+
+	public Order() {
 	}
 
 	public Long getOrder_id() {
@@ -84,9 +95,18 @@ public class Order {
 		this.customer_name = customer_name;
 	}
 
+	public String getItem_name() {
+		return customer_name;
+	}
+
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+
 	@Override
 	public String toString() {
-		return "Order Number: " + order_id + ", Customer: " + customer_name + ", Total: $" + df.format(total);
+		return "Order Number: " + order_id + ", Customer: " + customer_name + ", Item: " + item_name + ", Total: $"
+				+ df.format(total);
 	}
 
 	@Override

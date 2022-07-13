@@ -26,7 +26,8 @@ public class OrderDAO implements Dao<Order> {
 		Integer quantity = resultSet.getInt("quantity");
 		Double total = resultSet.getDouble("total");
 		String customer_name = resultSet.getString("customer_name");
-		return new Order(order_id, fk_customer_id, item_id, quantity, total, customer_name);
+		String item_name = resultSet.getString("item_name");
+		return new Order(order_id, fk_customer_id, item_id, quantity, total, customer_name, item_name);
 	}
 
 	/**
@@ -39,7 +40,7 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
-						"SELECT *, Concat(customers.first_name, ' ', customers.surname) AS customer_name, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id ORDER BY orders_items.orders_id ASC");) {
+						"SELECT *, Concat(customers.first_name, ' ', customers.surname) AS customer_name, items.item_name AS item_name, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id, items.id ORDER BY orders_items.orders_id ASC");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -125,6 +126,39 @@ public class OrderDAO implements Dao<Order> {
 			statement.setLong(3, order.getOrder_id());
 			statement.executeUpdate();
 			return read(order.getOrder_id());
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+
+	public Order addItem(Order order) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement(
+						"INSERT INTO orders_items (quantity, items_id, orders_id) VALUES (?, (SELECT id FROM items WHERE id = ?), (SELECT order_id FROM orders WHERE order_id = ?));");) {
+			statement.setInt(1, order.getQuantity());
+			statement.setLong(2, order.getItem_id());
+			statement.setLong(3, order.getOrder_id());
+			statement.executeUpdate();
+			return read(order.getOrder_id());
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+
+	public Order removeItem(Order order) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statementOne = connection
+						.prepareStatement("UPDATE orders_items SET quantity = 0 WHERE items_id = ? && orders_id = ?");
+				PreparedStatement statementTwo = connection
+						.prepareStatement("DELETE FROM orders_items WHERE quantity = 0");) {
+			statementOne.setLong(1, order.getItem_id());
+			statementOne.setLong(2, order.getOrder_id());
+			statementOne.executeUpdate();
+			statementTwo.executeUpdate();
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());

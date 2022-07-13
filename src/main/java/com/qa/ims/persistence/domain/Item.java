@@ -20,6 +20,10 @@ public class Item {
 		this.setPrice(price);
 	}
 
+	public Item(Long id) {
+		this.setId(id);
+	}
+
 	public Long getId() {
 		return id;
 	}
