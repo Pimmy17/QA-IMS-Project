@@ -1,24 +1,39 @@
 package com.qa.ims.persistence.domain;
 
+import java.text.DecimalFormat;
+
 public class Order {
 
 	private Long order_id;
 	private Long fk_customer_id;
 	private Long item_id;
 	private Integer quantity;
+	private Double total;
+	private String customer_name;
+	DecimalFormat df = new DecimalFormat("#0.00");
 
 	public Order(Long fk_customer_id, Long item_id, Integer quantity) {
 		super();
-		this.fk_customer_id = fk_customer_id;
-		this.item_id = item_id;
-		this.quantity = quantity;
+		this.setFk_customer_id(fk_customer_id);
+		this.setItem_id(item_id);
+		this.setQuantity(quantity);
 	}
 
-	public Order(Long order_id, Long fk_customer_id, Long item_id, Integer quantity) {
-		this.order_id = order_id;
-		this.fk_customer_id = fk_customer_id;
-		this.item_id = item_id;
-		this.quantity = quantity;
+	public Order(Long order_id, Long fk_customer_id, Long item_id, Integer quantity, Double total,
+			String customer_name) {
+		this.setOrder_id(order_id);
+		this.setFk_customer_id(fk_customer_id);
+		this.setItem_id(item_id);
+		this.setQuantity(quantity);
+		this.setTotal(total);
+		this.setCustomer_name(customer_name);
+	}
+
+	public Order(Long fk_customer_id2, Long order_id2, Long item_id2, Integer quantity2) {
+		this.order_id = order_id2;
+		this.fk_customer_id = fk_customer_id2;
+		this.item_id = item_id2;
+		this.quantity = quantity2;
 	}
 
 	public Long getOrder_id() {
@@ -53,10 +68,25 @@ public class Order {
 		this.quantity = quantity;
 	}
 
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public String getCustomer_name() {
+		return customer_name;
+	}
+
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+
 	@Override
 	public String toString() {
-		return "Order Number: " + order_id + ", Customer ID: " + fk_customer_id + ", Item ID: " + item_id
-				+ ", Quantity: " + quantity;
+		return "Order Number: " + order_id + ", Customer: " + customer_name + ", Total: $" + df.format(total);
 	}
 
 	@Override
@@ -67,6 +97,7 @@ public class Order {
 		result = prime * result + ((fk_customer_id == null) ? 0 : fk_customer_id.hashCode());
 		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((total == null) ? 0 : total.hashCode());
 		return result;
 	}
 
@@ -99,6 +130,12 @@ public class Order {
 				return false;
 		} else if (!quantity.equals(other.quantity))
 			return false;
+		if (total == null) {
+			if (other.total != null)
+				return false;
+		} else if (!total.equals(other.total))
+			return false;
 		return true;
 	}
+
 }
