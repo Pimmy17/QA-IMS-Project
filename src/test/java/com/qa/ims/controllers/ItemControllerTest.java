@@ -32,7 +32,7 @@ public class ItemControllerTest {
 	@Test
 	public void testCreate() {
 		final String ITEM_NAME = "Rubix Cube";
-		final Double PRICE = 1.50;
+		final double PRICE = 1.50;
 		final Item created = new Item(ITEM_NAME, PRICE);
 
 		Mockito.when(utils.getString()).thenReturn(ITEM_NAME);
@@ -49,7 +49,7 @@ public class ItemControllerTest {
 	@Test
 	public void testReadAll() {
 		List<Item> items = new ArrayList<>();
-		items.add(new Item(1L, "Bop-it", 5.99));
+		items.add(new Item("Bop-it", 5.99));
 
 		Mockito.when(dao.readAll()).thenReturn(items);
 

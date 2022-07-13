@@ -12,6 +12,7 @@ import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.utils.DBUtils;
 
 public class ItemDAOTest {
+
 	private final ItemDAO DAO = new ItemDAO();
 
 	@Before
