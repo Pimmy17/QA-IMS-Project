@@ -25,7 +25,8 @@ public class OrderDAO implements Dao<Order> {
 		Long item_id = resultSet.getLong("items_id");
 		Integer quantity = resultSet.getInt("quantity");
 		Double total = resultSet.getDouble("total");
-		return new Order(order_id, fk_customer_id, item_id, quantity, total);
+		String customer_name = resultSet.getString("customer_name");
+		return new Order(order_id, fk_customer_id, item_id, quantity, total, customer_name);
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
-						"SELECT *, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id");) {
+						"SELECT *, Concat(customers.first_name, ' ', customers.surname) AS customer_name, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id ORDER BY orders_items.orders_id ASC");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -55,7 +56,7 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
-						"SELECT *, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id ORDER BY order_id DESC LIMIT 1");) {
+						"SELECT *, Concat(customers.first_name, ' ', customers.surname) AS customer_name, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id ORDER BY order_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -73,12 +74,15 @@ public class OrderDAO implements Dao<Order> {
 	@Override
 	public Order create(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement(
-						"INSERT INTO orders_items (orders_id, items_id, quantity) VALUES((SELECT MAX(order_id) FROM orders WHERE fk_customer_id = ?), (SELECT id FROM items WHERE id = ?), ?)");) {
+				PreparedStatement statement = connection
+						.prepareStatement("INSERT INTO orders (fk_customer_id) VALUES (?);");) {
 			statement.setLong(1, order.getFk_customer_id());
-			statement.setLong(2, order.getItem_id());
-			statement.setInt(3, order.getQuantity());
 			statement.executeUpdate();
+			PreparedStatement statement2 = connection.prepareStatement(
+					"INSERT INTO orders_items (orders_id, items_id, quantity) VALUES (LAST_INSERT_ID(), ?, ?)");
+			statement2.setLong(1, order.getItem_id());
+			statement2.setInt(2, order.getQuantity());
+			statement2.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {
 			LOGGER.debug(e);
