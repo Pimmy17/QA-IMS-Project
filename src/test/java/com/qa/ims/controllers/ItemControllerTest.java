@@ -49,7 +49,7 @@ public class ItemControllerTest {
 	@Test
 	public void testReadAll() {
 		List<Item> items = new ArrayList<>();
-		items.add(new Item("Bop-it", 5.99));
+		items.add(new Item(1L, "Bop-it", 5.99));
 
 		Mockito.when(dao.readAll()).thenReturn(items);
 
