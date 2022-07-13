@@ -86,8 +86,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order Number: " + order_id + ", Customer: " + customer_name + ", Item ID: " + item_id + ", Quantity: "
-				+ quantity + ", Total: $" + df.format(total);
+		return "Order Number: " + order_id + ", Customer: " + customer_name + ", Total: $" + df.format(total);
 	}
 
 	@Override

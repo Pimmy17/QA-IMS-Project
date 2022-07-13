@@ -119,7 +119,7 @@ public class OrderDAO implements Dao<Order> {
 	public Order update(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement(
-						"UPDATE orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id SET items.id = ?, orders_items.quantity = ? WHERE orders.order_id = ? AND orders.fk_customer_id = ?");) {
+						"UPDATE orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN items ON items.id=orders_items.items_id SET items.id = ?, orders_items.quantity = ? WHERE orders_items.orders_id = ? AND orders.fk_customer_id = ?");) {
 			statement.setLong(1, order.getItem_id());
 			statement.setInt(2, order.getQuantity());
 			statement.setLong(3, order.getOrder_id());
