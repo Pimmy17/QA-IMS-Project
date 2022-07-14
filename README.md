@@ -1,11 +1,11 @@
-Coverage: 34%
-# Project Title
+Coverage: 67.4%
+# QA IMS Project
 
-One Paragraph of project description goes here
+Create an Inventory Management System that will allow the creation, deletion and updating of customers, items and customer's orders.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+To get this project working on your own system follow the below instructions:
 
 ### Prerequisites
 
@@ -84,6 +84,5 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Ed Reynolds & Jordan Harrison @ QA Ltd.
+* PG Tips for fuelling me in the mornings.
