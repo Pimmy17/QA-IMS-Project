@@ -31,7 +31,7 @@ public class OrderControllerTest {
 
 	@Test
 	public void testCreate() {
-		final Long customer_id = 89L, item_id = 99L;
+		final Long customer_id = 1L, item_id = 1L;
 		final Integer quant = 5;
 		final Order created = new Order(customer_id, item_id, quant);
 
@@ -60,7 +60,7 @@ public class OrderControllerTest {
 
 	@Test
 	public void testAddItemUpdate() {
-		Order updated = new Order(1L, 1L, 5);
+		Order updated = new Order(1L, 1L, 6);
 
 		Mockito.when(this.utils.getLong()).thenReturn(updated.getFk_customer_id(), updated.getOrder_id());
 		Mockito.when(this.utils.getString()).thenReturn("add");

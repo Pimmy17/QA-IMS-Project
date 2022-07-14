@@ -22,7 +22,7 @@ public class ItemDAO implements Dao<Item> {
 	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long id = resultSet.getLong("id");
 		String itemName = resultSet.getString("item_name");
-		double price = resultSet.getDouble("price");
+		Double price = resultSet.getDouble("price");
 		return new Item(id, itemName, price);
 	}
 
