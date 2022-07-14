@@ -89,7 +89,7 @@ public class OrderControllerTest {
 //
 //		Mockito.when(this.utils.getLong()).thenReturn(updated.getFk_customer_id(), updated.getOrder_id());
 //		Mockito.when(this.utils.getString()).thenReturn("add");
-//		Mockito.when(this.utils.getLong()).thenReturn(1L);
+//		Mockito.when(this.utils.getLong()).thenReturn(updated.getItem_id());
 //		Mockito.when(this.utils.getInt()).thenReturn(updated.getQuantity());
 //		Mockito.when(this.dao.update(updated)).thenReturn(updated);
 //
