@@ -28,4 +28,20 @@ public class OrderDAOTest {
 		assertEquals(created, DAO.create(created));
 	}
 
+	@Test
+	public void testNullCreate() {
+		Customer createdCust = new Customer("Bob", "Bobby");
+		Item createdItem = new Item("Jenga", 2.55);
+		Order created = new Order(createdCust.getId(), createdItem.getId(), 2);
+		assertEquals(null, DAO.create(created));
+	}
+
+//	@Test
+//	public void testReadAll() {
+//		List<Order> expected = new ArrayList<>();
+//		expected.add(new Order(1L, 1L, 1L, 2, 6.44, "Bob Loblaw", "Hungry Hippos"));
+//
+//		assertEquals(expected, DAO.readAll());
+//	}
+
 }
