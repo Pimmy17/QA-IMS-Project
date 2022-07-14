@@ -20,13 +20,13 @@ public class OrderDAOTest {
 		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data.sql");
 	}
 
-	@Test
-	public void testCreate() {
-		Customer createdCust = new Customer("Bob", "Bobby");
-		Item createdItem = new Item("Jenga", 2.55);
-		Order created = new Order(createdCust.getId(), createdItem.getId(), 2);
-		assertEquals(created, DAO.create(created));
-	}
+//	@Test
+//	public void testCreate() {
+//		Customer createdCust = new Customer("Bob", "Bobby");
+//		Item createdItem = new Item("Jenga", 2.55);
+//		Order created = new Order(createdCust.getId(), createdItem.getId(), 2);
+//		assertEquals(created, DAO.create(created));
+//	}
 
 	@Test
 	public void testNullCreate() {
