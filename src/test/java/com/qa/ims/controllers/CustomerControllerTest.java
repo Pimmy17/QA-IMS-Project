@@ -1,6 +1,7 @@
 package com.qa.ims.controllers;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,14 @@ public class CustomerControllerTest {
 
 		Mockito.verify(utils, Mockito.times(2)).getString();
 		Mockito.verify(dao, Mockito.times(1)).create(created);
+	}
+
+	@Test
+	public void testHashcode() {
+		Customer x = new Customer("Barry", "Scott"); // equals and hashCode check name field value
+		Customer y = new Customer("Barry", "Scott");
+		assertTrue(x.equals(y) && y.equals(x));
+		assertTrue(x.hashCode() == y.hashCode());
 	}
 
 	@Test
