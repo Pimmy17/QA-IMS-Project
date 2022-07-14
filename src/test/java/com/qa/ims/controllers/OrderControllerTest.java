@@ -1,6 +1,7 @@
 package com.qa.ims.controllers;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,30 @@ public class OrderControllerTest {
 		Mockito.verify(utils, Mockito.times(2)).getLong();
 		Mockito.verify(utils, Mockito.times(1)).getInt();
 		Mockito.verify(dao, Mockito.times(1)).create(created);
+	}
+
+	@Test
+	public void testHashcode() {
+		Order x = new Order(1L, 1L, 1L, 2, 5.50, "Barry Scott", "Jenga");
+		Order y = new Order(1L, 1L, 1L, 2, 5.50, "Barry Scott", "Jenga");
+		assertTrue(x.equals(y) && y.equals(x));
+		assertTrue(x.hashCode() == y.hashCode());
+	}
+
+	@Test
+	public void testHashcode2() {
+		Order x = new Order(1L, 1L, 1L, 4);
+		Order y = new Order(1L, 1L, 1L, 4);
+		assertTrue(x.equals(y) && y.equals(x));
+		assertTrue(x.hashCode() == y.hashCode());
+	}
+
+	@Test
+	public void testHashcode3() {
+		Order x = new Order(1L, 1L, 1L);
+		Order y = new Order(1L, 1L, 1L);
+		assertTrue(x.equals(y) && y.equals(x));
+		assertTrue(x.hashCode() == y.hashCode());
 	}
 
 	@Test
