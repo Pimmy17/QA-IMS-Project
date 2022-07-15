@@ -13,6 +13,8 @@ import com.qa.ims.utils.DBUtils;
 public class OrderDAOTest {
 
 	private final OrderDAO DAO = new OrderDAO();
+//	private final ItemDAO itemDAO = new ItemDAO();
+//	private final CustomerDAO custDAO = new CustomerDAO();
 
 	@Before
 	public void setup() {
@@ -22,7 +24,11 @@ public class OrderDAOTest {
 
 //	@Test
 //	public void testCreate() {
-//		Order created = new Order(1L, 1L, 2);
+//		Customer createCust = new Customer(3L, "Bob", "Loblaw");
+//		Item createItem = new Item(2L, "Hungry Hippos", 6.44);
+//		Order created = new Order(3L, 1L, 2L, 1);
+//		custDAO.create(createCust);
+//		itemDAO.create(createItem);
 //		assertEquals(created, DAO.create(created));
 //	}
 
@@ -51,5 +57,10 @@ public class OrderDAOTest {
 //		Order updated = new Order(1L, 1L, 1L, 5);
 //		assertEquals(updated, DAO.update(updated));
 //	}
+
+	@Test
+	public void testDelete() {
+		assertEquals(0, DAO.delete(1L));
+	}
 
 }
