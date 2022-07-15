@@ -22,8 +22,6 @@ public class OrderDAOTest {
 
 //	@Test
 //	public void testCreate() {
-////		Customer createdCust = new Customer("Bob", "Bobby");
-////		Item createdItem = new Item("Jenga", 2.55);
 //		Order created = new Order(1L, 1L, 2);
 //		assertEquals(created, DAO.create(created));
 //	}

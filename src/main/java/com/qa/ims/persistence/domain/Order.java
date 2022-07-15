@@ -81,11 +81,11 @@ public class Order {
 		this.quantity = quantity;
 	}
 
-	public double getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 
@@ -126,6 +126,9 @@ public class Order {
 		result = prime * result + ((order_id == null) ? 0 : order_id.hashCode());
 		result = prime * result + ((fk_customer_id == null) ? 0 : fk_customer_id.hashCode());
 		result = prime * result + ((item_id == null) ? 0 : item_id.hashCode());
+		result = prime * result + ((item_name == null) ? 0 : item_name.hashCode());
+		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
+		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((total == null) ? 0 : total.hashCode());
 		return result;
