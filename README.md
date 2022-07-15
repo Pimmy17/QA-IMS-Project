@@ -1,4 +1,4 @@
-Coverage: 56.5%
+Coverage: 57.0%
 # QA IMS Project
 
 Create an Inventory Management System that will allow the creation, deletion and updating of customers, items and customer's orders.
