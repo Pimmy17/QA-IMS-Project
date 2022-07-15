@@ -25,9 +25,10 @@ public class OrderDAO implements Dao<Order> {
 		Long item_id = resultSet.getLong("items_id");
 		Integer quantity = resultSet.getInt("quantity");
 		Double total = resultSet.getDouble("total");
-		String customer_name = resultSet.getString("customer_name");
+		String first_name = resultSet.getString("first_name");
+		String surname = resultSet.getString("surname");
 		String item_name = resultSet.getString("item_name");
-		return new Order(order_id, fk_customer_id, item_id, quantity, total, customer_name, item_name);
+		return new Order(order_id, fk_customer_id, item_id, quantity, total, first_name, surname, item_name);
 	}
 
 	/**
@@ -40,7 +41,7 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
-						"SELECT *, Concat(customers.first_name, ' ', customers.surname) AS customer_name, items.item_name AS item_name, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id, items.id ORDER BY orders_items.orders_id ASC");) {
+						"SELECT *, customers.first_name AS first_name, customers.surname AS surname, items.item_name AS item_name, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id, items.id ORDER BY orders_items.orders_id ASC");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -57,7 +58,7 @@ public class OrderDAO implements Dao<Order> {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(
-						"SELECT *, Concat(customers.first_name, ' ', customers.surname) AS customer_name, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id ORDER BY order_id DESC LIMIT 1");) {
+						"SELECT *, customers.first_name AS first_name, customers.surname AS surname, SUM(orders_items.quantity*items.price) AS total FROM orders_items JOIN orders ON orders.order_id=orders_items.orders_id JOIN customers ON customers.id=orders.fk_customer_id JOIN items ON items.id=orders_items.items_id GROUP BY orders_items.orders_id ORDER BY order_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {

@@ -9,7 +9,8 @@ public class Order {
 	private Long item_id;
 	private Integer quantity;
 	private Double total;
-	private String customer_name;
+	private String first_name;
+	private String surname;
 	private String item_name;
 	DecimalFormat df = new DecimalFormat("#0.00");
 
@@ -20,14 +21,15 @@ public class Order {
 		this.setQuantity(quantity);
 	}
 
-	public Order(Long order_id, Long fk_customer_id, Long item_id, Integer quantity, Double total, String customer_name,
-			String item_name) {
+	public Order(Long order_id, Long fk_customer_id, Long item_id, Integer quantity, Double total, String first_name,
+			String surname, String item_name) {
 		this.setOrder_id(order_id);
 		this.setFk_customer_id(fk_customer_id);
 		this.setItem_id(item_id);
 		this.setQuantity(quantity);
+		this.setFirst_name(first_name);
+		this.setSurname(surname);
 		this.setTotal(total);
-		this.setCustomer_name(customer_name);
 		this.setItem_name(item_name);
 	}
 
@@ -87,16 +89,24 @@ public class Order {
 		this.total = total;
 	}
 
-	public String getCustomer_name() {
-		return customer_name;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setCustomer_name(String customer_name) {
-		this.customer_name = customer_name;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public String getItem_name() {
-		return customer_name;
+		return item_name;
 	}
 
 	public void setItem_name(String item_name) {
@@ -105,8 +115,8 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order Number: " + order_id + ", Customer: " + customer_name + ", Item: " + item_name + ", Total: $"
-				+ df.format(total);
+		return "Order Number: " + order_id + ", Customer: " + first_name + " " + surname + ", Item: " + item_name
+				+ ", Total: $" + df.format(total);
 	}
 
 	@Override
