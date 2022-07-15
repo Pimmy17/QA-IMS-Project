@@ -22,9 +22,9 @@ public class OrderDAOTest {
 
 //	@Test
 //	public void testCreate() {
-//		Customer createdCust = new Customer("Bob", "Bobby");
-//		Item createdItem = new Item("Jenga", 2.55);
-//		Order created = new Order(createdCust.getId(), createdItem.getId(), 2);
+////		Customer createdCust = new Customer("Bob", "Bobby");
+////		Item createdItem = new Item("Jenga", 2.55);
+//		Order created = new Order(1L, 1L, 2);
 //		assertEquals(created, DAO.create(created));
 //	}
 
@@ -39,9 +39,19 @@ public class OrderDAOTest {
 //	@Test
 //	public void testReadAll() {
 //		List<Order> expected = new ArrayList<>();
-//		expected.add(new Order(1L, 1L, 1L, 2, 6.44, "Bob Loblaw", "Hungry Hippos"));
-//
+//		expected.add(new Order(2L, 2L, 2L, 2, 6.44, "Bob", "Loblaw", "Hungry Hippos"));
 //		assertEquals(expected, DAO.readAll());
+//	}
+
+//	@Test
+//	public void testUpdate() {
+//		Customer createdCust = new Customer("Bob", "Bobby");
+//		Item createdItem = new Item("Jenga", 2.55);
+//		Order original = new Order(createdCust.getId(), 1L, createdItem.getId(), 2, createdItem.getPrice(),
+//				createdCust.getFirstName() + " " + createdCust.getSurname(), createdItem.getItemName());
+//		assertEquals(original, DAO.create(original));
+//		Order updated = new Order(1L, 1L, 1L, 5);
+//		assertEquals(updated, DAO.update(updated));
 //	}
 
 }

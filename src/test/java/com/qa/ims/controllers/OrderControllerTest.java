@@ -49,8 +49,8 @@ public class OrderControllerTest {
 
 	@Test
 	public void testHashcode() {
-		Order x = new Order(1L, 1L, 1L, 2, 5.50, "Barry Scott", "Jenga");
-		Order y = new Order(1L, 1L, 1L, 2, 5.50, "Barry Scott", "Jenga");
+		Order x = new Order(1L, 1L, 1L, 2, 5.50, "Barry", "Scott", "Jenga");
+		Order y = new Order(1L, 1L, 1L, 2, 5.50, "Barry", "Scott", "Jenga");
 		assertTrue(x.equals(y) && y.equals(x));
 		assertTrue(x.hashCode() == y.hashCode());
 	}
@@ -101,23 +101,24 @@ public class OrderControllerTest {
 		Mockito.verify(this.dao, Mockito.times(1)).update(updated);
 	}
 
-//	@Test
-//	public void testAddItemUpdate() {
-//		Order updated = new Order(1L, 1L, 6);
-//
-//		Mockito.when(this.utils.getLong()).thenReturn(updated.getFk_customer_id(), updated.getOrder_id());
-//		Mockito.when(this.utils.getString()).thenReturn("add");
-//		Mockito.when(this.utils.getLong()).thenReturn(updated.getItem_id());
-//		Mockito.when(this.utils.getInt()).thenReturn(updated.getQuantity());
-//		Mockito.when(this.dao.update(updated)).thenReturn(updated);
-//
-//		assertEquals(updated, this.controller.update());
-//
-//		Mockito.verify(this.utils, Mockito.times(3)).getLong();
-//		Mockito.verify(this.utils, Mockito.times(1)).getString();
-//		Mockito.verify(this.utils, Mockito.times(1)).getInt();
-//		Mockito.verify(this.dao, Mockito.times(1)).update(updated);
-//	}
+	@Test
+	public void testAddItemUpdate() {
+
+		Order updated = new Order(1L, 1L, 2L, 1);
+
+		Mockito.when(this.utils.getLong()).thenReturn(updated.getFk_customer_id(), updated.getOrder_id());
+		Mockito.when(this.utils.getString()).thenReturn("add");
+		Mockito.when(this.utils.getLong()).thenReturn(updated.getItem_id());
+		Mockito.when(this.utils.getInt()).thenReturn(updated.getQuantity());
+		Mockito.when(this.dao.addItem(updated)).thenReturn(updated);
+
+		assertEquals(updated, this.controller.update());
+
+		Mockito.verify(this.utils, Mockito.times(3)).getLong();
+		Mockito.verify(this.utils, Mockito.times(1)).getString();
+		Mockito.verify(this.utils, Mockito.times(1)).getInt();
+		Mockito.verify(this.dao, Mockito.times(1)).addItem(updated);
+	}
 
 //	@Test
 //	public void testDeleteItemUpdate() {
