@@ -1,7 +1,6 @@
-Coverage: 57.0%
+Coverage: 57.6%
 # QA IMS Project
-
-Create an Inventory Management System that will allow the creation, deletion and updating of customers, items and customer's orders.
+This project is an Inventory Management System that allows the creation, deletion and updating of customers, items and customer's orders.
 
 ## Getting Started
 
@@ -9,7 +8,7 @@ To get this project working on your own system follow the below instructions:
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install the software and how to install them:
 
 ```
 Give examples
