@@ -10,7 +10,7 @@ To get this project working on your own system follow the below instructions:
 
 What things you need to install the software and how to install them:
 
-```
+
 *Terminal:
 Powershell - Is already installed in most Computers
 Git & GitBash - Installation can be found [here](https://git-scm.com/downloads)
@@ -19,11 +19,11 @@ Git & GitBash - Installation can be found [here](https://git-scm.com/downloads)
 [Eclipse](https://www.eclipse.org/downloads/) - Recommended
 [VS Code](https://code.visualstudio.com/download) - Will require additional add-ons installing within the IDE in order to run Java files properly
 
-```
+
 
 ### Installing
 
-```
+
 *Cloning the Repo:
 If you have access to a terminal and an IDE then you should be able to clone the repo to allow you to run the application or if you fork and clone the repo, then you can make your own changes and version of the IMS.
 
@@ -35,19 +35,24 @@ If you have access to a terminal and an IDE then you should be able to clone the
         Then press enter to begin the cloning
     
     Finally, to access the repo do the following depending on which of the above IDEs you decided on:
+    ```
         For Eclipse: Open up the project by selecting -> 'File' ---> 'Open Projects From File System' ---> Select 'Directory' 
         and choose the file where the IMS project is stored on your system.
         For VS Code: Whilst in your terminal, type in 'cd QA-IMS-Project' to enter the project file, then type 'code .'
         This should open up VS Code and the project.
-```
+    ```
 
-*To run the file:
+### To Run The Program:
 
-```
+
 In your terminal, enter in 'cd target'
-Inside the target file, you can enter in 'java -jar .\ims-0.0.1-jar-with-dependencies.jar' then hit enter
-This will run the program
+Inside the target file, you can enter in 
 ```
+'java -jar .\ims-0.0.1-jar-with-dependencies.jar'
+```
+then hit enter
+This will run the program
+
 
 An example of what can be expected from running the program can be found in the presentations file, under the slides named 'Run-through of Project'.
 
