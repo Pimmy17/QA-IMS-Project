@@ -26,29 +26,30 @@ Git & GitBash - Installation can be found [here](https://git-scm.com/downloads)
 
 
 
-### Installing
+## Installing
 
 
-*Cloning the Repo:
+### Cloning the Repo:
 
-If you have access to a terminal and an IDE then you should be able to clone the repo to allow you to run the application or if you fork and clone the repo, then you can make your own changes and version of the IMS.
-
+If you have access to a terminal and an IDE then you should be able to clone the repo to allow you to run the application or if you fork and clone the 
+repo, then you can make your own changes and version of the IMS. 
 
     Firstly, head to my main page of the repo by [clicking here](https://github.com/Pimmy17/QA-IMS-Project).
     
     Secondly, click the green 'Code' button, which will present a drop down with the HTTPS and SSH key need to clone the repo.
     
     Thirdly, head to your terminal and the folder you wish to copy this repo in to and then type in 'git clone' followed by either the HTTPS or SSH key.
-        Then press enter to begin the cloning
+            Then press enter to begin the cloning
     
     Finally, to access the repo do the following depending on which of the above IDEs you decided on:
     
-    ```
+    
+   ```
         For Eclipse: Open up the project by selecting -> 'File' ---> 'Open Projects From File System' ---> Select 'Directory' 
         and choose the file where the IMS project is stored on your system.
         For VS Code: Whilst in your terminal, type in 'cd QA-IMS-Project' to enter the project file, then type 'code .'
         This should open up VS Code and the project.
-    ```
+   ```
 
 ### To Run The Program:
 
@@ -58,7 +59,7 @@ Inside the target file, you can enter in
 ```
 'java -jar .\ims-0.0.1-jar-with-dependencies.jar'
 ```
-then hit enter
+then hit enter.
 This will run the program
 
 
