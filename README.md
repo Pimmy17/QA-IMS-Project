@@ -12,11 +12,14 @@ What things you need to install the software and how to install them:
 
 
 *Terminal:
+
 Powershell - Is already installed in most Computers
 
 Git & GitBash - Installation can be found [here](https://git-scm.com/downloads)
 
+
 *IDE:
+
 [Eclipse](https://www.eclipse.org/downloads/) - Recommended
 
 [VS Code](https://code.visualstudio.com/download) - Will require additional add-ons installing within the IDE in order to run Java files properly
