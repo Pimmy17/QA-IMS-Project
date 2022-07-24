@@ -32,6 +32,7 @@ Git & GitBash - Installation can be found [here](https://git-scm.com/downloads)
 *Cloning the Repo:
 If you have access to a terminal and an IDE then you should be able to clone the repo to allow you to run the application or if you fork and clone the repo, then you can make your own changes and version of the IMS.
 
+
     Firstly, head to my main page of the repo by [clicking here](https://github.com/Pimmy17/QA-IMS-Project).
     
     Secondly, click the green 'Code' button, which will present a drop down with the HTTPS and SSH key need to clone the repo.
@@ -40,6 +41,7 @@ If you have access to a terminal and an IDE then you should be able to clone the
         Then press enter to begin the cloning
     
     Finally, to access the repo do the following depending on which of the above IDEs you decided on:
+    
     ```
         For Eclipse: Open up the project by selecting -> 'File' ---> 'Open Projects From File System' ---> Select 'Directory' 
         and choose the file where the IMS project is stored on your system.
