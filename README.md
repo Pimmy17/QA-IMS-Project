@@ -30,6 +30,7 @@ Git & GitBash - Installation can be found [here](https://git-scm.com/downloads)
 
 
 *Cloning the Repo:
+
 If you have access to a terminal and an IDE then you should be able to clone the repo to allow you to run the application or if you fork and clone the repo, then you can make your own changes and version of the IMS.
 
 
