@@ -1,6 +1,8 @@
+
 Coverage: 57.6%
 # QA IMS Project
 This project is an Inventory Management System that allows the creation, deletion and updating of customers, items and customer's orders.
+
 
 ## Getting Started
 
@@ -94,5 +96,7 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Ed Reynolds & Jordan Harrison @ QA Ltd.
-* PG Tips for fuelling me in the mornings.
+
+* Ed Reynolds & Jordan Harrison @ QA Ltd
+* PG Tips for providing the tea that keeps me going!
+
